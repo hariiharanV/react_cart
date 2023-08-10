@@ -68,6 +68,10 @@ button:focus-visible {
   }
 } */
 
+.card{
+min-width: 460px;
+
+}
 
 .card-body{
   display: flex;
@@ -234,3 +238,24 @@ h5{
   outline:none;
 }
 
+
+.dropdown{
+  width: 420px;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom:8px;
+  margin-top:2px;
+}
+
+.dropdownList{
+  cursor: pointer;
+  width:230px;
+  background-color: rgb(213, 158, 158);
+  border-radius: 5px;
+  color:whitesmoke;
+  padding:3px;
+}
+
+.dropdownList:focus{
+  outline-color: rgb(224, 255, 255);
+}

@@ -1,4 +1,5 @@
 import {FaCaretLeft, FaCaretRight, FaTrash, } from 'react-icons/fa'
+import {useState, useEffect} from 'react'
 
 function ItemList({newItem,setNewItem}) {
 
@@ -43,6 +44,7 @@ function ItemList({newItem,setNewItem}) {
   
     function deleteHandler(id)
     {
+  
       setNewItem((currItems)=>{
         return currItems.filter((item)=>{
           return item.id != id;
@@ -50,6 +52,7 @@ function ItemList({newItem,setNewItem}) {
       })
     }
 
+    
 
   return (
     <div className="listBody">  
