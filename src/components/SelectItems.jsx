@@ -1,8 +1,9 @@
 import {useState,useEffect} from 'react'
+import {nanoid} from 'nanoid';
 
-function SelectItems({previousItems,setItemName,itemName,newItem,addItemHandler}) {
+function SelectItems({previousItems,setItemName,itemName,setNewItem,newItem,addItemHandler}) {
 
-  const [temp,setTemp] = useState()
+  const [temp,setTemp] = useState([])
 
   const [filterItems,setFilterItems] = useState(()=>{
 
@@ -17,15 +18,16 @@ function SelectItems({previousItems,setItemName,itemName,newItem,addItemHandler}
 
   const [fnlFilterItems,setFnlFilterItems] = useState([])
 
+  const [items,setItems] = useState([])
+
   useEffect(()=>{
     console.log("inside change")
 
     setFnlFilterItems((items)=>{
       return ["Previously added items",...filterItems]
-    })
-
-   // e.target.selectedIndex = 0;    
+    })  
   },[filterItems])
+
 
   function getValue(e)
   {
@@ -50,11 +52,39 @@ function SelectItems({previousItems,setItemName,itemName,newItem,addItemHandler}
 
   },[temp])
 
-  // useEffect(()=>{
 
+  function addItemsToList()
+  {
+    const itemNames = JSON.parse(localStorage.getItem("Items")).map((item)=>item.itemName)
 
+    const modified_items = JSON.parse(localStorage.getItem("PreviousItems")).map((tmp)=>({id:nanoid(),itemName:tmp,qty:1,wishListState:false,isChecked:false,measure:""}));
 
-  // },[itemName])
+    const filteredItems_toAdd = modified_items.filter((mod_itemName)=>{
+
+      return !itemNames.includes(mod_itemName.itemName)
+
+    })
+
+    console.log(filteredItems_toAdd)
+
+    const array_list = newItem.concat(filteredItems_toAdd)
+
+    setNewItem(array_list)
+
+  }
+
+  function addAllHandler()
+  {
+    console.log('click')
+
+    const fetch_items = JSON.parse(localStorage.getItem("PreviousItems"));
+
+    // const mod = fetch_items.map((tmp)=>({id:nanoid(),itemName:tmp,qty:1}));
+    // console.log(mod);
+
+    addItemsToList()
+
+  }
 
   return (
     <div className="dropdown">
@@ -65,6 +95,7 @@ function SelectItems({previousItems,setItemName,itemName,newItem,addItemHandler}
             return  <option key={item} value={item}>{item}</option>
         })}
         </select>
+        <button className="addBtn" onClick={addAllHandler} type="submit"> 🛒 </button>
   </div>
   )
 }

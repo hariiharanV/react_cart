@@ -7,99 +7,86 @@ import ItemList from './components/ItemList'
 import Total from './components/total';
 import SelectItems from './components/SelectItems';
 import {nanoid} from 'nanoid';
+import WishListItems from './components/WishListItems';
+import Routers from './routes/Routers';
+import {BrowserRouter as Router, Routes, Route,useNavigate} from "react-router-dom"
+import ShopList from './components/ShopList';
 
 
-function App() {
+function App({searchString,setSearchString,previousItems,setPreviousItems,newItem,setNewItem,
+qtyTotal,setQtyTotal, itemName,setItemName, wishItems, setWishItems, deleteWished, setDeleteWished}) {
 
-  const [newItem,setNewItem] = useState(()=>{
+  const navigate=useNavigate()
 
-    const getItems = localStorage.getItem("Items")
+//   const [newItem,setNewItem] = useState(()=>{
 
-    if(getItems== null) return []
+//     const getItems = localStorage.getItem("Items")
 
-    return JSON.parse(getItems)
+//     if(getItems== null) return []
 
-  })
+//     return JSON.parse(getItems)
 
-  const [qtyTotal,setQtyTotal] = useState()
-  const [searchString,setSearchString] = useState('')
-  const [itemName,setItemName] = useState()
-  const [previousItems,setPreviousItems] = useState(()=>{
+//   })
 
-   const prev_items =  localStorage.getItem("PreviousItems")
+//   const [qtyTotal,setQtyTotal] = useState()
+//   const [searchString,setSearchString] = useState('')
+//   const [itemName,setItemName] = useState()
+//   const [previousItems,setPreviousItems] = useState(()=>{
 
-   if(prev_items == null) return [];
+//    const prev_items =  localStorage.getItem("PreviousItems")
 
-  //  const items_wanted = JSON.parse(prev_items);
+//    if(prev_items == null) return [];
 
-  //  //const newItem_list = newItem.length > 0  && newItem.map((item)=> item.itemName)
+//         return JSON.parse(prev_items)
+//   }
+//   )
+ 
+// const [wishItems,setWishItems] = useState(()=>{
 
-  // const newItem_list = JSON.parse(localStorage.getItem("Items"))
+//   const wish_lst =  localStorage.getItem("WishList");
 
-  // if(newItem_list!=null && newItem_list.length >0)
-  // {
-  //     console.log('inside if')
+//    if(wish_lst == null) return [];
 
-  //   const get_onlyNames = newItem_list.map((item)=> {return item.itemName})
+//    return JSON.parse(wish_lst)
 
-  //   const select_items = items_wanted.filter((item)=>{
-  //       return !get_onlyNames.includes(item);
-  //     })
-        
-  //     console.log(select_items)
-  //     return select_items;
+// })
+
+// const [deleteWished,setDeleteWished] = useState([])
+
+  // useEffect(()=>{
+
+  //   if(Array.isArray(newItem) && newItem.length>0)
+  //   {
+  //     const total = newItem.reduce((acc,item)=>acc+item.qty,0);
+
+  //     setQtyTotal(total)
   //   }
-  
 
-  //       return items_wanted;
+  //   console.log(newItem)
 
-        return JSON.parse(prev_items)
-  }
-  )
+  //   localStorage.setItem("Items",JSON.stringify(newItem))
 
-  useEffect(()=>{
+  // },[newItem])
 
-    const total = newItem.reduce((acc,item)=>acc+item.qty,0);
-
-    setQtyTotal(total)
-
-    localStorage.setItem("Items",JSON.stringify(newItem))
-
-   // console.log(newItem)
-
-    // const itemNames = newItem.map((item)=> item.itemName )
-
-    // console.log(itemNames)
-
-    // setSelectItem(itemNames);
-
-  },[newItem])
-
-  useEffect(()=>{
-      console.log(previousItems)
-      localStorage.setItem("PreviousItems",JSON.stringify(previousItems))
-  },[previousItems])
+  // useEffect(()=>{
+  //     console.log(previousItems)
+  //     localStorage.setItem("PreviousItems",JSON.stringify(previousItems))
+  // },[previousItems])
 
  // console.log(searchString)
-
- function getItemName(val)
- {
-    console.log(val)
- }
-
 
  function addItemHandler()
     {
 
-       const found_item =  newItem.find((item)=>item.itemName.toLowerCase() == itemName.toLowerCase())
+       const found_item =  newItem && newItem.find((item)=>item.itemName.toLowerCase() == itemName.toLowerCase())
 
-    //  console.log(found_item)
+      console.log(found_item)
 
       if(itemName.length >=1 && found_item===undefined)
       {
        // console.log(itemName)
         setNewItem((currItem)=>{
-          return [...currItem,{id:nanoid(),itemName:itemName,qty:1}]
+          return [...currItem,{id:nanoid(),itemName:itemName,qty:1,wishListState:false,isChecked:false,measure:""}]
         })
 
         const found_added_items = previousItems.find((item)=>item.toLowerCase() === itemName.toLowerCase())
@@ -124,21 +111,30 @@ function App() {
             </div>
 
               <SelectItems previousItems={previousItems} setItemName={setItemName} 
-              itemName={itemName} addItemHandler={addItemHandler} newItem={newItem}/>
+              itemName={itemName} addItemHandler={addItemHandler} newItem={newItem} 
+              setNewItem={setNewItem}/>
+
+              <WishListItems newItem={newItem} wishItems={wishItems} setNewItem={setNewItem} setWishItems={setWishItems} deleteWished={deleteWished}/>
 
               <AddItem setNewItem={setNewItem} newItem={newItem} previousItems={previousItems} 
               setPreviousItems={setPreviousItems} itemName={itemName} setItemName={setItemName} 
               addItemHandler={addItemHandler}/>
 
-            {newItem.length>0 && <ItemList newItem={searchString.length>0?
+            {Array.isArray(newItem) && newItem.length>0 && <ItemList newItem={searchString.length>0?
             newItem.filter((item)=> {return item.itemName.toLowerCase().includes(searchString.toLowerCase())}):
             newItem
-          } setNewItem={setNewItem} />}
+          } setNewItem={setNewItem} setWishItems={setWishItems} setDeleteWished={setDeleteWished}/>}
 
-            {newItem.length > 0 && <Total newItem={newItem} qty={qtyTotal}  />}
+            {Array.isArray(newItem) && newItem.length>0 && <Total newItem={newItem} qty={qtyTotal}  />}
+
+            {newItem.length>0 && <div className="shop">
+                      <button type="submit" className="shopBtn" onClick={()=>{navigate('/react_cart/shop')}}>shop </button> 
+            </div>}
+
           </div>
       </div>
     </div>
+
   )
 }
 

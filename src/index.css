@@ -163,13 +163,6 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.numberSec{
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  max-width: 100px;
-}
-
 
 .arrow{
   color:rgb(248, 101, 27);
@@ -182,10 +175,12 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .total{
   padding:10px 10px;
+  margin-left: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 425px;
+  width: 425px;
+  /* background-color: aqua; */
 }
 
 h5{
@@ -210,6 +205,30 @@ h5{
 
 .delete:hover{
   color:rgb(226, 20, 20);
+  transform: scale(1.2);
+}
+
+.heart_yes{
+  margin-top: 3px;
+  color:rgb(186, 0, 155);
+  transition: transform 0.2s ease-in-out;
+  margin-right: 8px;
+}
+
+/* .heart_yes:hover{
+  color:rgb(186, 0, 155);
+  transform: scale(1.2);
+} */
+
+.heart_no{
+  margin-top: 3px;
+  color:rgb(240, 240, 240);
+  transition: transform 0.2s ease-in-out;
+  margin-right: 8px;
+}
+
+.heart_no:hover{
+  color:rgb(186, 0, 155);
   transform: scale(1.2);
 }
 
@@ -243,9 +262,15 @@ h5{
   width: 420px;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   margin-bottom:8px;
   margin-top:2px;
 }
+
+/* .deleteList{
+  margin-left:100px;
+
+} */
 
 .dropdownList{
   cursor: pointer;
@@ -256,6 +281,219 @@ h5{
   padding:3px;
 }
 
+.dltIcon{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left:100px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.dltIcon:hover{
+  color:rgb(226, 20, 20);
+  transform: scale(1.2);
+}
+
+.deleteAll{
+  outline: none;
+  /* background-color: none; */
+  border: none;
+  display: contents;
+}
+
 .dropdownList:focus{
   outline-color: rgb(224, 255, 255);
+}
+
+.addBtn{
+  border-radius: 15px;
+  margin-left: 5px;
+  padding:2px 6px; 
+  background-color: rgb(255, 246, 210);
+  align-items: center;
+}
+
+.addBtn:hover{
+  background-color: rgb(213, 158, 158);
+  color: whitesmoke;
+}
+
+.wishBtn{
+  border-radius: 15px;
+  margin-left: 5px;
+  padding:2px 6px; 
+  background-color: rgb(255, 246, 210);
+}
+
+.wishBtn:hover{
+  background-color: rgb(213, 158, 158);
+  color: whitesmoke;
+}
+
+.shop{
+  margin-left: 6px;
+  display: flex;
+  justify-content: flex-end;
+  width: 378px;
+  align-items: center;
+
+}
+
+.shopBtn{
+  border-radius: 20px;
+   background-color: rgb(211, 56, 185);
+   color: black;
+   padding:3px 10px;
+   align-items: center;
+}
+
+.shopBtn:hover{
+  background-color: darkviolet;
+  color: whitesmoke;
+  border-color: antiquewhite;
+}
+
+.checkItem{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width:400px;
+  font-size: 12px;
+  margin-right: 6px;
+}
+
+.checkItemSec{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+ 
+}
+
+.checkbox{
+  margin-right:3px;
+  size:30px;
+}
+
+
+.checkName{
+  text-decoration: line-through;
+  text-decoration-color: whitesmoke;
+  font-size: 25px;
+}
+
+.uncheckName{
+  text-decoration: none;
+  font-size: 25px;
+}
+
+/* .title-cart{
+  background-color: rgb(225, 218, 131);
+  border-radius: 20px;
+} */
+
+.shop-container{
+  background-color: khaki;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  min-width:100%;
+}
+
+.cartBody{
+  background-color:  rgb(255, 245, 155);
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 4px;
+}
+
+.cart-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 410px;
+}
+
+.cartWishList{
+  /*color:rgb(211, 211, 211);*/
+  color:rgb(178, 61, 61);
+  margin-left:4px;
+}
+
+.cart-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color:rgb(208, 125, 95);
+}
+
+.header{
+  font-size: 27px;
+}
+
+.cartQty{
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.cartMeasure{
+  color:rgb(145, 92, 92);
+}
+
+.numberSec{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  max-width: 140px; 
+}
+
+.measure {
+  margin-left:2px;
+  background-color: rgb(243, 243, 243);
+  cursor: pointer;
+}
+
+.totalShopped{
+  display: flex;
+  width: 390px;
+  justify-content: flex-start;
+  align-items: center;
+  color:rgb(70, 4, 132);
+}
+
+.gotoCart{
+  display: flex;
+  width: 410px;
+  margin:5px 0px;
+  justify-content: flex-start;
+}
+
+.remaining{
+  color:rgb(248, 101, 27);
+  font-size: 22px;
+}
+
+.shopped{
+  color:rgb(10, 159, 10);
+  font-size: 22px;
+}
+.remain{
+  margin-left:10px;
+}
+
+.gotoCartBtn{
+  border-radius: 35px;
+   background-color: rgb(198, 74, 74);
+   color: whitesmoke;
+   padding:3px 10px;
+   align-items: center;
+}
+
+.gotoCartBtn:hover{
+  background-color: darkviolet;
+  color: whitesmoke;
+  border-color: antiquewhite;
 }
