@@ -12,7 +12,7 @@ function ItemList({newItem,setNewItem,setWishItems,setDeleteWished}) {
       setNewItem((currItems)=>{
         return currItems.map((currItem)=>{
             if(currItem.id == id){
-              return {...currItem, qty:currItem.qty++};
+              return {...currItem, qty:parseInt(currItem.qty)+1};
             } 
   
             return currItem;
@@ -36,7 +36,7 @@ function ItemList({newItem,setNewItem,setWishItems,setDeleteWished}) {
           return currItems.map((currItem)=>{
             if(currItem.id == getItem.id)
             {
-              return {...currItem, qty:currItem.qty-1}
+              return {...currItem, qty:parseInt(currItem.qty)-1}
             }
             return currItem;
           })

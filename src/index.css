@@ -392,7 +392,8 @@ h5{
 } */
 
 .shop-container{
-  background-color: khaki;
+  /* background-color: khaki; */
+  background-color: antiquewhite;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -402,7 +403,8 @@ h5{
 }
 
 .cartBody{
-  background-color:  rgb(255, 245, 155);
+  /* background-color:  rgb(255, 245, 155); */
+  background-color: rgb(251, 228, 197);
   border-radius: 5px;
   padding: 10px;
   margin-top: 4px;
