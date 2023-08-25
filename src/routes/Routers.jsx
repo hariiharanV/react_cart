@@ -39,7 +39,22 @@ const [wishItems,setWishItems] = useState(()=>{
 
 })
 
-const [deleteWished,setDeleteWished] = useState([])
+const [deleteWished,setDeleteWished] = useState(()=>{
+
+      const wished_items = JSON.parse(localStorage.getItem("WishList"));
+
+      if(wished_items == null) return [];
+
+    //   const itemlist = JSON.parse(localStorage.getItem("Items"))
+
+    //  const filtered_items =  wished_items.filter((items)=>{
+    //     return !items.itemName.includes(itemlist.itemName)
+    //   })
+
+      return wished_items;
+})
+
+const [checked,setChecked] = useState([])
 
 useEffect(()=>{
 
@@ -52,12 +67,40 @@ useEffect(()=>{
 
   localStorage.setItem("Items",JSON.stringify(newItem))
 
+  const checked_itms = newItem.filter((item)=>{
+    return item.isChecked == true;
+})
+
+  setChecked(checked_itms)
+
 },[newItem])
+
+
+useEffect(()=>{
+
+  if(checked.length === newItem.length)
+    {
+        const url = window.location.href;
+        if(url.includes('shop'))
+        {
+          alert('Yasss! Shopping spree complete, fam! 🛍️🙌')
+        }
+    }
+
+},[checked])
 
 useEffect(()=>{
     console.log(previousItems)
     localStorage.setItem("PreviousItems",JSON.stringify(previousItems))
 },[previousItems])
+
+useEffect(()=>{
+
+  console.log(deleteWished)
+
+      localStorage.setItem("WishList",JSON.stringify(deleteWished))
+
+},[deleteWished])
 
 
   return (

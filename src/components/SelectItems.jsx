@@ -18,7 +18,16 @@ function SelectItems({previousItems,setItemName,itemName,setNewItem,newItem,addI
 
   const [fnlFilterItems,setFnlFilterItems] = useState([])
 
-  const [items,setItems] = useState([])
+  useEffect(()=>{
+
+    if(itemName != null && itemName != "Previously added items")
+    {
+      console.log(itemName)
+      addItemHandler()
+    }
+
+  },[temp])
+
 
   useEffect(()=>{
     console.log("inside change")
@@ -33,7 +42,6 @@ function SelectItems({previousItems,setItemName,itemName,setNewItem,newItem,addI
   {
     console.log(e.target.value)
 
-
     setTemp(e.target.value)
 
     setItemName(e.target.value)
@@ -41,17 +49,6 @@ function SelectItems({previousItems,setItemName,itemName,setNewItem,newItem,addI
     e.target.selectedIndex = 0;
   
   }
-
-  useEffect(()=>{
-
-    if(itemName != null && itemName != "Previously added items")
-    {
-      console.log(itemName)
-      addItemHandler()
-    }
-
-  },[temp])
-
 
   function addItemsToList()
   {
@@ -79,10 +76,9 @@ function SelectItems({previousItems,setItemName,itemName,setNewItem,newItem,addI
 
     const fetch_items = JSON.parse(localStorage.getItem("PreviousItems"));
 
-    // const mod = fetch_items.map((tmp)=>({id:nanoid(),itemName:tmp,qty:1}));
-    // console.log(mod);
-
     addItemsToList()
+
+    window.location.reload();
 
   }
 

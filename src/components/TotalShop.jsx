@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react"
 
-function TotalShop({newItem,qty}) {
+function TotalShop({newItem}) {
 
     const [shopped,setShopped] = useState()
     const [remaining,setRemaining] = useState()
+    const [qty,setQty] = useState()
 
 
     useEffect(()=>{
 
         console.log('check')
+
+        const qty_calc = newItem.reduce((acc,item)=>acc+item.qty,0)
+
+        setQty(qty_calc)
 
         const checked_items =  newItem.filter((item)=>{
             return item.isChecked === true 
@@ -21,11 +26,6 @@ function TotalShop({newItem,qty}) {
     })
 
     setRemaining(unchecked_items.length)
-
-    if(unchecked_items.length == 0)
-    {
-        alert("Woohoo! All done with the shopping!")
-    }
 
     },[newItem])
 

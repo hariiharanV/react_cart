@@ -2,7 +2,7 @@ import {FaCaretLeft, FaCaretRight, FaTrash, FaHeart} from 'react-icons/fa'
 import {useState} from 'react'
 
 
-function ItemList({newItem,setNewItem,setWishItems,setDeleteWished}) {
+function ItemList({newItem,setNewItem,deleteWished,setDeleteWished}) {
 
   const [qty,setQty] = useState()
 
@@ -59,8 +59,19 @@ function ItemList({newItem,setNewItem,setWishItems,setDeleteWished}) {
       if(delete_item.wishListState === true)
       {
         console.log(true)
-        setDeleteWished(delete_item)
+
+        const delete_items = deleteWished.filter((wished)=>{
+          return wished.itemName.includes(delete_item.itemName)
+        })
+
+        if(delete_items.length == 0)
+        {
+          setDeleteWished((item)=>{
+            return [...item, delete_item]
+          })
+        }
       }
+    
     }
 
     function wishHandler(id)
@@ -129,7 +140,7 @@ function ItemList({newItem,setNewItem,setWishItems,setDeleteWished}) {
                       <FaCaretRight className="arrow" onClick={()=>incrementHandler(item.id)} size={55}/>
                                      
                       <select className="measure" name="measure" id="measure" value={item.measure} onChange={(e)=>getMeasure(e,item.id)}> 
-                          <option value="" disabled>qty</option>  
+                          <option value="" >qty</option>  
                           <option value="L">L</option>
                           <option value="ml">ml</option>
                           <option value="kg">kg</option>

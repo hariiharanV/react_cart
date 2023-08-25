@@ -22,7 +22,6 @@ setCartItems(searchString.length>0?
 
 function handleCheckboxChange(id)
 {
-
     setNewItem((items)=>{
        return items.map((itm)=>{
             if(itm.id == id)
@@ -32,8 +31,9 @@ function handleCheckboxChange(id)
             return itm;
         })
     })
-
 }
+
+
 
 
 function gotoCart()
