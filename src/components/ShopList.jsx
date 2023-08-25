@@ -34,6 +34,20 @@ function handleCheckboxChange(id)
 }
 
 
+function checkAll()
+{
+    const result = window.confirm("You seriously wanna tick off all those on a checklist? 📝🤔");
+    
+    if(result)
+    {
+        setNewItem((items)=>{
+            return items.map((item)=>{
+                return {...item,isChecked:true}
+            })
+        })
+    }
+}
+
 
 
 function gotoCart()
@@ -52,6 +66,7 @@ function gotoCart()
             </div>  
             <div className="gotoCart">
                 <button className="gotoCartBtn" onClick={gotoCart} type="submit">Goto Cart</button>
+                <button className="selectAllBtn" onClick={checkAll} type="submit">Select All</button>
              </div>
             <div className="cartBody">
             <div className="cart-header">
